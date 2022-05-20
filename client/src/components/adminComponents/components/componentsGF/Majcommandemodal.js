@@ -36,6 +36,7 @@ const maDate= new Date();
 const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
     const [numfacture, setnumfacture]=useState("");
     const [codeclient,setcodeclient]=useState('')
+    const [nomprenom,setnomprenom]=useState('')
     const [Prixtot,setPrixtot]=useState('')
     const [modeliv,setmodeliv]=useState('')
     const [lieuliv,setlieuliv]=useState('')
@@ -55,7 +56,7 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
   useEffect(()=>{
     setnumfacture(props.data.Numcomm)
     setemail(props.data.email)
-  
+    setnomprenom(props.data.nomprenom)
     setcodeclient(props.data.Codeclient)
     setPrixtot(props.data.PrixTOT)
     setmodeliv(props.data.Modelivraison)
@@ -69,7 +70,8 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: 500,
+      
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 8,
@@ -91,26 +93,29 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 1000, height:400 }}>
-          <h2 id="child-modal-title">Régler facture</h2>
-         
-          <div className='gridreglement'>
+        <Box sx={{ ...style, width: 800, height:460 }}>
+        <div className='titleregle'>
+          <h2 id="child-modal-title">Régler facture</h2></div>
+         <br></br>
+          <div className='gridreglementt'>
         
-          <label for="position">Numéro de factue</label>
+          <label for="position">Numéro de facture</label>
      <input  value= {numfacture} disabled></input>
 
-     <label for="position">codeclient-nom et prénom</label>
-     <input  value= {codeclient} disabled ></input>
-     <label for="position">Prix totale</label>
+     <label for="position">Code client </label>
+     <input  value= '4214778YZT000' disabled ></input>
+     <label for="position"> Nom et prénom</label>
+     <input  value= '  Hammouda bahri 'disabled ></input>
+     <label for="position">Prix totale (en dt) </label>
      <input  value= {Prixtot} disabled></input>
-     <label for="position">lieu de livraison</label>
+     <label for="position">Lieu de livraison</label>
      <input  value= {lieuliv} disabled></input>
-     <label for="position">code et nom de mode de paiement</label>
+     <label for="position">Mode de paiement</label>
      <input  value= {modepai} disabled></input></div>
-     
-     
+     <br></br>
+     <div className='btnregle'>
         <Button  onClick={()=>submit(props.data._id)}>Régler</Button>
-        <Button  onClick={props.handleClose}>Fermer</Button>
+        <Button  onClick={props.handleClose}>Fermer</Button></div>
         </Box>
       </Modal>
             </React.Fragment>

@@ -21,13 +21,15 @@ interface IFormInputs {
  code: number;
   nom: string;
 prix: number; 
-description:string;
+Description:string;
 photo:string;
+
 }
 const schema = yup.object().shape({
  code: yup.string().required('Veuillez entrer le code de l"article').min(6).max(6),
-  nom: yup.string().min(4).max(20).required('Veuillez entrer le nom  de l"article').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
- prix: yup.number().required('Veuillez entrer le prix')
+  nom: yup.string().min(4).max(30).required("Veuillez entrer le nom  de l'eharticle").matches(/^[A-Za-z é à û]*$/, 'Veuillez entrer un nom valide'),
+ prix: yup.number().required('Veuillez entrer le prix'),
+ Description:yup.string().min(50).max(200).required('Veuillez entrer la description'),
  
 });
  
@@ -52,11 +54,12 @@ const schema = yup.object().shape({
 var prixarticle=(data.prix);
 var codearticle=(data.code);
 var nomarticle=(data.nom);
+var Description=(data.Description);
 
-    axios.post("http://localhost:5000/article/ajouter",{codearticle,nomarticle,prixarticle})
+    axios.post("http://localhost:5000/article/ajouter",{codearticle,nomarticle,prixarticle,Description})
     .then(res => {
         if(res.status===200){
-          reset({ prix:'',nom:'',code:''}) 
+          reset({ prix:'',nom:'',code:'',Description:''}) 
          
           setSubmitted(true)
           const timer = setTimeout(() => {
@@ -169,21 +172,31 @@ var nomarticle=(data.nom);
             )}
           />
           <div className='inlineaerticle'>
-           <Controller
-            name="description"
+          <Controller
+            name="Description"
             control={control}
            
             render={({ field }) => (
-              <TextField
-              id="standard-multiline-static"
-              label="Description"
+              <TextField   
+              label="Description de l'article"
+              variant="standard"
+              placeholder="entrer la Description de l'article"
+            
               multiline
               rows={3}
-             
-              variant="standard"
-            />
+        
+              defaultValue=""
+           
+                {...field}
+                
+    
+                error={!!errors.Description}
+                helperText={errors.Description ? errors.Description?.message : ''}
+               
+              />
             )}
-          /> 
+          />
+           
             <Controller
             name="photo"
             control={control}
@@ -203,7 +216,7 @@ var nomarticle=(data.nom);
               <br></br>
 <Button       type='submit' variant="contained" endIcon={<SendIcon />}> Envoyer </Button></div>
 <div className='bt'>
- <Button   type='reset'     onClick={() => { reset({ prix: null,nom:'',code:null})  } }variant="outlined" startIcon={<DeleteIcon />}> Annuler </Button>  </div>
+ <Button   type='reset'     onClick={() => { reset({ prix:'',nom:'',code:'',Description:''})  } }variant="outlined" startIcon={<DeleteIcon />}> Annuler </Button>  </div>
  </div>
 </form>
 

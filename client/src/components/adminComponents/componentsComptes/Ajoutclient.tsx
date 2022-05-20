@@ -33,15 +33,16 @@ interface IFormInputs {
   password: string;
  nom: string;
   prenom: string;
-  identifiant:number;
+  identifiant:string;
   societe:string;
 }
 
 const schema = yup.object().shape({
   email: yup.string().email(),
-  password: yup.string().min(8).max(20).required('Veuillez entrer le mot de passe '),
-  nom: yup.string().min(4).max(20).required('Veuillez entrer le nom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
-  prenom: yup.string().min(4).max(20).required('Veuillez entrer le prénom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un prénom valide'),
+  password: yup.string().min(8).max(12).required('Veuillez entrer le mot de passe '),
+  nom: yup.string().min(4).max(15).required('Veuillez entrer le nom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
+  prenom: yup.string().min(4).max(15).required('Veuillez entrer le prénom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un prénom valide'),
+  societe: yup.string().min(4).max(15).required('Veuillez entrer le prénom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer une societe valide'),
   identifiant: yup.string().min(13).max(13).required('Veuillez entrer la matricule fiscale ').test(
     "maxDigits",
     "au minimum deux nombres",
@@ -71,10 +72,11 @@ const Ajoutclient: FC = () => {
   var nom=(data.nom);
   var password=(data.password);
   var identifiant=(data.identifiant) ; 
+  var societe=(data.societe) ; 
         axios.post("http://localhost:5000/user/sign-up",{societe,nom,prenom,email,identifiant,acctype, password,date,month,year,day,monthname})
         .then(res => {
             if(res.status===200){
-              reset({prenom:'',nom:'', email: '',password: '',identifiant:null}) ; setAcctype('') ; setSociete('') ;
+              reset({prenom:'',nom:'', email: '',password: '',identifiant:'',societe:''}) ; setAcctype('') ; setSociete('') ;
               setSigned(true)
               const timer = setTimeout(() => {
                 setSigned(false)
@@ -113,12 +115,12 @@ const Ajoutclient: FC = () => {
            
             render={({ field }) => (
               <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
-              onChange={(e)=>setNom(e.target.value)} value={Nom}  
+          
                 {...field}
                 label="Société"
               
-                error={!!errors.nom}
-                helperText={errors.nom ? errors.nom?.message : ''}
+                error={!!errors.societe}
+                helperText={errors.societe? errors.societe?.message : ''}
                
               />
             )}
@@ -246,7 +248,7 @@ const Ajoutclient: FC = () => {
       </Button>
 
       <Button  type='reset'   onClick={() => {  reset({prenom:'',nom:'', email: '',   password: '',
-            identifiant:null}) ,setAcctype('') ,setSociete('') } } variant="outlined" startIcon={<DeleteIcon />}>
+            identifiant:'',societe:''}) ,setAcctype('') ,setSociete('') } } variant="outlined" startIcon={<DeleteIcon />}>
         Delete
       </Button>
         </div>

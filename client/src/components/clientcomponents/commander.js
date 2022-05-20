@@ -418,8 +418,14 @@ const [affiche3,setAffiche3]=useState([])
    </div>
  </div>
 </form>
+
       <p>{error}</p>
       <p>{Submitted}</p>
+      <div class="footer">
+<p><b>Siège: </b> Zone industrielle rades II, 1125 rades saline  Tunis ,Tunisie</p>
+<p><b>Tel: </b> +216 79 457 155/<b>Fax:</b>216 79 457 184  </p>
+<p>Copyright © 2022 Arab Soft.</p>
+</div>
  
 </div>
 )

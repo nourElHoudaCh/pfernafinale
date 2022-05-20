@@ -13,8 +13,11 @@
     position: sticky;
     bottom: 0;
   }
-  .gridreglement{display: grid;
-    grid-template-columns: 150px  500px;
+  .gridreglementt{display: grid;
+    grid-template-columns: 150px  400px;
+    justify-content: space-around;
  
     }
     .tbaleregler{width:1000px}
+    .btnregle{margin-left: 250px;}
+    .titleregle{margin-left: 220px;}

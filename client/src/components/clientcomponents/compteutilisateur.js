@@ -190,7 +190,11 @@ else {
         
         </Row>
         <Majarticlemodal open={open} data={id} handleClose={handleClose}/>
-      </div></div>
+        
+      </div>
+    
+ 
+      </div>
     </>
   );
 }

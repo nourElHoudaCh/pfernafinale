@@ -48,20 +48,18 @@
     .footer {
        
         left: 0;
-        
+     position: relative;
         width: 100%;
         background-color: #1976d2;
-        height: 80px;
+        height: 50px;
        color:white;
         display: grid;
-        grid-template-columns: auto auto  auto ;
-        align-content: flex-end;
-        justify-content: space-between;
+        grid-template-columns: auto auto  auto   ; 
+        align-content:flex-end;
+        justify-content: space-around;
        
        
      }
      .commandertext{color: white;}
 .alertwidth{width:400px}
-.rnalogo{height: 60px;
-  margin-bottom: -20px;
-}
+.bodysuivre{background-color: white;}

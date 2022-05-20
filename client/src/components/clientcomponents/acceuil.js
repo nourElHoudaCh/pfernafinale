@@ -59,7 +59,7 @@ export default function Acceuil() {
  <br></br> 
  <br></br> 
  <br></br> 
-  <h1 className='articletitle'>Les articles disponible</h1>
+  <h1 className='articletitle'>Les articles disponibles</h1>
   <div className="grid-container">
    {affiche.map(el=>{
       return ( <>
@@ -82,7 +82,7 @@ export default function Acceuil() {
       </CardContent>
       <CardActions>
         
-        <Button size="small">{el.Prix}dt</Button>
+        <Button size="small" style={{marginLeft:'140px'}}>{el.Prix}dt</Button>
       </CardActions>
     </Card></div>
       </>
@@ -90,21 +90,16 @@ export default function Acceuil() {
     })}
    
     </div>
-
-    <div  className='espace'></div>
+    <br></br> 
+    <br></br> 
+   
     <div class="footer">
-
-
  
-<h6><b>Siège: </b> Zone industrielle rades II, 1125 rades saline </h6>
+<p><b>Siège: </b> Zone industrielle rades II, 1125 rades saline  Tunis ,Tunisie</p>
 
-<h6><b>Tel: </b> +216 79 457 155 </h6>
+<p><b>Tel: </b> +216 79 457 155/<b>Fax:</b>216 79 457 184  </p>
+<p>Copyright © 2022 Arab Soft.</p>
 
-<img   className='rnalogo' src={rna}/>
-
-<h6> Tunis ,Tunisie</h6>
-
- <h6><b>Fax:</b>216 79 457 184 </h6>
  
 </div>
     </div>

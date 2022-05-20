@@ -67,4 +67,11 @@ padding-left: 40px;
     left:37%;
     
     }
-   
+   .accmodalcss{
+       display: grid;
+       grid-template-columns:310px 310px;
+      justify-content: space-between;
+      line-height: 80px;
+      
+       
+   }

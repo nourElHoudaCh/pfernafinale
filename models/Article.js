@@ -36,6 +36,10 @@ Coef : {
 Quantite :{
     type :Number
 }
+,
+Description :{
+    type : String
+}
 })
 
 module.exports=Article=mongoose.model("Article",ArticleSchema); 

@@ -5,15 +5,15 @@
   import Box from '@mui/material/Box';
   import React,{useEffect,useState, useRef} from 'react';
   import Dialog from "./dialog";
-  import { FcDeleteRow} from 'react-icons/fc';
+
   import axios from 'axios'
   import jwt_decode from 'jwt-decode'
-  import StripeCheckout from "react-stripe-checkout";
+
   import { toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
   import CreditCardForm from './paiement/CreditCardForm';
   import Button from '@mui/material/Button';
-  import rna from './logo rna.png'
+import './clientnavbar.css'
   import {
     Card,
     CardHeader,
@@ -73,7 +73,7 @@
         isLoading,
         nameProduct  }); };
     const handleDelete=(id)=>{
-      handleDialog("Voulez vous vraiment annuler la commande numéro", true, id,);
+      handleDialog("Voulez-vous vraiment annuler la commande numéro", true, id,);
       idProductRef.current = id; };
 const areUSureDelete = (choose) => {
   if (choose) {
@@ -157,6 +157,7 @@ const areUSureDelete = (choose) => {
       <>
       <br></br>
       <br></br>
+      <div className='bodysuivre'>
       <div><h1> <center>Mes factures</center></h1></div>
       <br></br>
       <br></br>
@@ -318,23 +319,19 @@ const areUSureDelete = (choose) => {
       
    
     </Box>
-   <br></br>
-    <div class="footer">
+ <br></br>
+ <br></br>
 
+   <div class="footer">
 
- 
-<h6><b>Siège: </b> Zone industrielle rades II, 1125 rades saline </h6>
+<p><b>Siège: </b> Zone industrielle rades II, 1125 rades saline  Tunis ,Tunisie</p>
 
-<h6><b>Tel: </b> +216 79 457 155 </h6>
+<p><b>Tel: </b> +216 79 457 155/<b>Fax:</b>216 79 457 184  </p>
+<p>Copyright © 2022 Arab Soft.</p>
 
-<img   className='rnalogo' src={rna}/>
-
-<h6> Tunis ,Tunisie</h6>
-
- <h6><b>Fax:</b>216 79 457 184 </h6>
  
 </div>
-<div></div>
+<div></div></div>
     </>
   );
 }

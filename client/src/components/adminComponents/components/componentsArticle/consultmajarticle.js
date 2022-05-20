@@ -73,15 +73,14 @@ const loadarticles=()=>{
   const handleClose = () => {
     setOpen(false);
   };
-  
-  
+
   
     return (
 <main id="site-main">
 <div class="containerarticle">
     
-    <form action="/" method="POST">
-    <Card>
+    <form action="/" method="POST"  >
+    <Card >
               <CardHeader>
                 <CardTitle tag="h4">Liste des articles</CardTitle>
               </CardHeader>
