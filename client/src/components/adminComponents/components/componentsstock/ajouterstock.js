@@ -86,7 +86,7 @@ export default function Ajouterstock() {
     <form className='formaddarticle'>
    
      <FormControl variant="standard" sx={{ m: 1, minWidth: 120,width:310 }}>
-        <InputLabel id="demo-simple-select-filled-label">Code Article</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label"> Nom et quantité de l' Article</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
@@ -97,11 +97,11 @@ export default function Ajouterstock() {
       
           </MenuItem>
           {affiche.map((el) => (
-            <MenuItem value={el._id}> {el.Designation} </MenuItem>
+            <MenuItem value={el._id}> {el.Designation} | quantite : {el.Quantite} </MenuItem>
           ))}
         </Select>
       </FormControl>
-
+  
            <TextField
             id="Ajout Quantité"
             label="Ajout Quantité"
@@ -109,6 +109,7 @@ export default function Ajouterstock() {
             placeholder="Ajouter la quantité"
             fullWidth
             margin="normal"
+            type='number'
             onChange={(e)=>setQuantite(e.target.value)} value={Quantite}
           />
           <br></br><br></br>

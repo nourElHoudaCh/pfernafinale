@@ -36,12 +36,7 @@ function Majcomptesmodal(props) {
     const [mail,setmail]=useState('')
     const [Identifiant,setIdentifiant]=useState('')
     const [password,setpassword]=useState('')
-    const [societeerror, setsocieteerror]=useState('');
-    const [nomerror,setnomerror]=useState('')
-    const [Prenomerror,setPrenomerror]=useState('')
-    const [mailerror,setmailerror]=useState('')
-
-    const [passworderror,setpassworderror]=useState('')
+ 
     const [acctype,setacctype]=useState('')
     const [Submitted,setSubmitted]=useState(false);
     const [error,setError]=useState(false);
