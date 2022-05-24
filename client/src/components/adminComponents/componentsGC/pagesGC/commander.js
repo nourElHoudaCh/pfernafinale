@@ -9,7 +9,9 @@ import DatePicker from 'react-datepicker';
 import Button from '@mui/material/Button';
  export  default function Commander(){
   const prevBtns = document.querySelectorAll(".btn-prev");
+  const charge = document.getElementById("charger")
   const nextBtns = document.querySelectorAll(".btn-next");
+  const nextBtnsarticle = document.querySelectorAll(".btn-nextarticle");
   const progress = document.getElementById("progress");
   const formSteps = document.querySelectorAll(".form-step");
   const progressSteps = document.querySelectorAll(".progress-step");
@@ -18,12 +20,57 @@ import Button from '@mui/material/Button';
   
   nextBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (Vol=='' )
+      {setVolerror('veuiller entrer le volume')}
+      else {setVolerror('vrai')}
+      if(Nbrfut=='')
+      {setNbrfuterror('veuiller entrer le nombre de fut')}
+      else {setNbrfuterror('vrai')}
+     
+      if(Lieulivraison=='')
+      {setLieulivraisonerror('veuiller entrer le nombre de fut')}
+      else {setLieulivraisonerror('vrai')}
+
+
+   
+  if (Codeclient === '___choisir le code client___'||Codeclient === '' ) 
+  { setCodeclienterror('choisir un client');}
+else{
+  setCodeclienterror('vrai');}
+
+  if (('#pay option:selected').length > 0) {
+    
+    if (Modepaiement=== '___choisir le mode de paiement ___'||Modepaiement === '' ) 
+    { setModepaiementerror('choisir un mode de paiement');}
+  else{
+    setModepaiementerror('vrai');}}
+    if (('#liv option:selected').length > 0) {
+      if (Modelivraison=== '___choisir le mode de livraison ___'||Modelivraison=== '' ) 
+      { setModelivraisonerror('choisir un mode de livraison');}
+    else{
+      setModelivraisonerror('vrai');}}
+      
+      if (Codeclient!='___choisir le code client___' && Codeclient!='' && click!='clicked')
+      {setcharger('veuillez charger les données du client')}
+     
+      else {setcharger('vrai')}
+      if (Volerror=='vrai' && Nbrfuterror=='vrai' && Lieulivraisonerror=='vrai' && Codeclienterror=='vrai' && Modelivraisonerror=='vrai' && Modepaiementerror=='vrai'&& charger=='vrai'){
       formStepsNum++;
       updateFormSteps();
-      updateProgressbar();
-    });
-  });
-  
+      updateProgressbar();}
+    });}
+  );
+  nextBtnsarticle.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (document.getElementById('article').checked ) 
+       {setcheck('vrai')}
+       else {setcheck('veuillez choisir au moins un article')}
+      if (check=='vrai' ){
+      formStepsNum++;
+      updateFormSteps();
+      updateProgressbar();}
+    });}
+  );
   prevBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       formStepsNum--;
@@ -64,6 +111,15 @@ import Button from '@mui/material/Button';
   const [Lieulivraison,setLieulivraison]=useState('');
   const [Nbrfut,setNbrfut]=useState('');
   const [Vol,setVol]=useState('');
+  const [Modepaiementerror,setModepaiementerror]=useState('');
+  const [Codeclienterror,setCodeclienterror]=useState('');
+  const [Modelivraisonerror,setModelivraisonerror]=useState('');
+  const [Lieulivraisonerror,setLieulivraisonerror]=useState('');
+  const [Nbrfuterror,setNbrfuterror]=useState('');
+  const [Volerror,setVolerror]=useState('');
+  const [check,setcheck]=useState('');
+  const [charger,setcharger]=useState('');
+  const [click,setclick]=useState('');
   const [Datecomm,setDatecomm]=useState(new Date());
   const [Infoarticlescommander,setInfoarticlescommander]=useState([]);
   const [PrixHT,setPrixHT]=useState("");
@@ -232,8 +288,8 @@ const [affiche3,setAffiche3]=useState([])
      <div class="input-group">
  <label for="modelivraison">Code client</label>
 
- <select  name="modelivraison" id="modelivraison" onChange={(e)=>setCodeclient(e.target.value)} value={Codeclient}>
-<option></option>
+ <select  name="code" id="code" onChange={(e)=>setCodeclient(e.target.value)} value={Codeclient} style={{height:'50px' , width:'299px'}}>
+<option >___choisir le code client___</option>
     {affiche2.map((el)=>{
                   return (
                     <>
@@ -245,18 +301,19 @@ const [affiche3,setAffiche3]=useState([])
                 })}
   
 </select> 
-
+<p style={{color:'red'}}>{Codeclienterror!='vrai'?Codeclienterror:''} </p>
 </div>
 <div class="input-group">
 
      <input  type="button"
-       value="charger"   onClick={()=>{afficheracquis(Codeclient)}}  className="butt"  style={{height:'50px', marginTop:"30px"}}/>
+       value="charger"  id='charger'  onClick={()=>{{afficheracquis(Codeclient); setclick("clicked") }}}  className="butt"  style={{height:'50px', marginTop:"30px"}}/>
+      <p style={{color:'red'}}> {charger!='vrai'?charger:''}</p>
 </div>
 {affichenew.map(el=>{  return ( <>
        
   <div class="input-group">
   <label for="Modepaiement">Nom</label>
-     <input       value= {el.nom } disabled></input> </div>
+     <input   id='nom'  value={el.nom} disabled></input> </div>
      <div class="input-group">
      <label for="Modepaiement">Prénom</label>
      <input    value= {el.prenom} disabled></input> </div>
@@ -274,11 +331,12 @@ const [affiche3,setAffiche3]=useState([])
    <div class="input-group">
      <label for="Modepaiement">Mode de paiement</label>
 
-     <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModepaiement(e.target.value)} value={Modepaiement} >
-   
+     <select  name="pay" id="pay"  onChange={(e)=>setModepaiement(e.target.value)} value={Modepaiement} style={{height:'50px' , width:'299px'}} >
+      <option>___choisir le mode de paiement ___</option>
     {affiche3.map((el)=>{
                   return (
                     <>
+                    
                     <option>
                      {el.Modedepaiement}
                     </option>
@@ -286,32 +344,35 @@ const [affiche3,setAffiche3]=useState([])
                   )
                 })}
 </select> 
-
+<p style={{color:'red'}}> {Modepaiementerror!='vrai'?Modepaiementerror:''}</p>
    </div>
 
    <div class="input-group">
      <label for="Modepaiement">Mode de livraison</label>
 
-     <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModelivraison(e.target.value)} value={Modelivraison} >
-     <option></option>
+     <select  name="liv" id="liv"  onChange={(e)=>setModelivraison(e.target.value)} value={Modelivraison} style={{height:'50px' , width:'299px'}}>
+     <option>___choisir le mode de livraison ___</option>
     <option>Propres moyen</option>
     <option>A domicile</option>
 </select> 
-
+<p style={{color:'red'}}> {Modelivraisonerror!='vrai'?Modelivraisonerror:''}</p>
    </div>
    <div class="input-group">
      <label for="position">Lieu de livraison</label>
-     <input onChange={(e)=>setLieulivraison(e.target.value)} value={Lieulivraison}></input>
+     <input onChange={(e)=>setLieulivraison(e.target.value)} value={Lieulivraison} type="text"></input>
+     <p style={{color:'red'}}> {Lieulivraisonerror!='vrai'?Lieulivraisonerror:''}</p>
      </div>
 
      <div class="input-group">
      <label for="position">Nombre de fut</label>
-     <input onChange={(e)=>setNbrfut(e.target.value)} value={Nbrfut}></input>
+     <input onChange={(e)=>setNbrfut(e.target.value)} value={Nbrfut} type="number"></input>
+     <p style={{color:'red'}}> {Nbrfuterror!='vrai'?Nbrfuterror:''}</p>
      </div>
 
      <div class="input-group">
      <label for="position">Volume en Litre</label>
-     <input onChange={(e)=>setVol(e.target.value)} value={Vol}></input>
+     <input onChange={(e)=>setVol(e.target.value)} value={Vol} type="number"></input>
+     <p style={{color:'red'}}>{Volerror!='vrai'?Volerror:''}</p>
      </div>
 
    <div class="input-group">
@@ -336,6 +397,7 @@ const [affiche3,setAffiche3]=useState([])
  </div>
  
  <div class="form-step">
+ <p style={{color:'red'}}>{check!='vrai'?check:''} </p>
  <form action="/" method="POST">
         <table class="table table-commander">
              <thead className="text-primary">
@@ -356,10 +418,10 @@ const [affiche3,setAffiche3]=useState([])
                   <td className="first-td-checkbox-commander">
                   <Checkbox
                   onClick={handleToggle({id:el._id,des:el.Designation,cd:el.CodeArticle,quan:el.quantite,pr:el.Prix})}
-                  id="vehicle1"
+                  id="article"
                     edge="end"
                   />
-                  <label for="vehicle1">{el.Designation}</label>
+                  <label for="article">{el.Designation}</label>
                   </td>
                   <td>{el.CodeArticle}</td>
                   <td>{el.Prix}</td>
@@ -374,7 +436,7 @@ const [affiche3,setAffiche3]=useState([])
     </form>
    <div class="btns-group">
      <a href="#" class="btnn btn-prev">Précédent</a>
-     <a href="#" class="btnn btn-next ml-auto"   onClick={montanttotale} >Suivant</a>
+     <a href="#" class="btnn btn-nextarticle ml-auto"   onClick={montanttotale} >Suivant</a>
    </div>
  </div>
 

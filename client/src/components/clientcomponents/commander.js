@@ -10,20 +10,64 @@ import DatePicker from 'react-datepicker';
 
  export  default function Commander(){
   const prevBtns = document.querySelectorAll(".btn-prev");
+  const charge = document.getElementById("charger")
   const nextBtns = document.querySelectorAll(".btn-next");
+  const nextBtnsarticle = document.querySelectorAll(".btn-nextarticle");
   const progress = document.getElementById("progress");
   const formSteps = document.querySelectorAll(".form-step");
   const progressSteps = document.querySelectorAll(".progress-step");
   let formStepsNum = 0;
   var comm_id =Date.now();
   
+  
   nextBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (Vol=='' )
+      {setVolerror('veuiller entrer le volume')}
+      else {setVolerror('vrai')}
+      if(Nbrfut=='')
+      {setNbrfuterror('veuiller entrer le nombre de fut')}
+      else {setNbrfuterror('vrai')}
+     
+      if(Lieulivraison=='')
+      {setLieulivraisonerror('veuiller entrer le nombre de fut')}
+      else {setLieulivraisonerror('vrai')}
+
+
+  
+
+  if (('#pay option:selected').length > 0) {
+    
+    if (Modepaiement=== '___choisir le mode de paiement ___'||Modepaiement === '' ) 
+    { setModepaiementerror('choisir un mode de paiement');}
+  else{
+    setModepaiementerror('vrai');}}
+    if (('#liv option:selected').length > 0) {
+      if (Modelivraison=== '___choisir le mode de livraison ___'||Modelivraison=== '' ) 
+      { setModelivraisonerror('choisir un mode de livraison');}
+    else{
+      setModelivraisonerror('vrai');}}
+      
+     
+     
+    
+      if (Volerror=='vrai' && Nbrfuterror=='vrai' && Lieulivraisonerror=='vrai' &&  Modelivraisonerror=='vrai' && Modepaiementerror=='vrai'){
       formStepsNum++;
       updateFormSteps();
-      updateProgressbar();
-    });
-  });
+      updateProgressbar();}
+    });}
+  );
+  nextBtnsarticle.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (document.getElementById('article').checked ) 
+       {setcheck('vrai')}
+       else {setcheck('veuillez choisir au moins un article')}
+      if (check=='vrai' ){
+      formStepsNum++;
+      updateFormSteps();
+      updateProgressbar();}
+    });}
+  );
   
   prevBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -69,7 +113,13 @@ import DatePicker from 'react-datepicker';
   const [PrixHT,setPrixHT]=useState("");
   const [Remise,setRemise]=useState(0);
   const [PrixTOT,setPrixTOT]=useState();
-  
+  const [Modepaiementerror,setModepaiementerror]=useState('');
+  const [Codeclienterror,setCodeclienterror]=useState('');
+  const [Modelivraisonerror,setModelivraisonerror]=useState('');
+  const [Lieulivraisonerror,setLieulivraisonerror]=useState('');
+  const [Nbrfuterror,setNbrfuterror]=useState('');
+  const [Volerror,setVolerror]=useState('');
+  const [check,setcheck]=useState('');
   const [mail,setemail]=useState('');
   const [nom,setnom]=useState('');
   const [prenom,setprenom]=useState('');
@@ -239,7 +289,7 @@ const [affiche3,setAffiche3]=useState([])
    <div class="input-group">
      <label for="Modepaiement">Mode paiement</label>
 
-     <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModepaiement(e.target.value)} value={Modepaiement} >
+     <select  name="pay" id="pay"  onChange={(e)=>setModepaiement(e.target.value)} value={Modepaiement} >
     <option selected > -- Choisir le mode de paiement-- </option>
     {affiche3.map((el)=>{
                   return (
@@ -251,44 +301,47 @@ const [affiche3,setAffiche3]=useState([])
                   )
                 })}
 </select> 
-
+<p style={{color:'red'}}> {Modepaiementerror!='vrai'?Modepaiementerror:''}</p>
    </div>
 
    <div class="input-group">
      <label for="Modepaiement">Mode de livraison</label>
 
-     <select  name="modelivraison" id="modelivraison"  onChange={(e)=>setModelivraison(e.target.value)} value={Modelivraison} >
+     <select  name="liv" id="liv"  onChange={(e)=>setModelivraison(e.target.value)} value={Modelivraison} >
     <option selected > -- Choisir le mode de livraison -- </option>
     <option>Propres moyen</option>
     <option>A domicile</option>
 </select> 
-
+<p style={{color:'red'}}> {Modelivraisonerror!='vrai'?Modelivraisonerror:''}</p>
    </div>
    <div class="input-group">
      <label for="position">Lieu de livraison</label>
      <input onChange={(e)=>setLieulivraison(e.target.value)} value={Lieulivraison}></input>
+     <p style={{color:'red'}}> {Lieulivraisonerror!='vrai'?Lieulivraisonerror:''}</p>
      </div>
 
      <div class="input-group">
      <label for="position">Nombre de fut</label>
      <input onChange={(e)=>setNbrfut(e.target.value)} value={Nbrfut}></input>
+     <p style={{color:'red'}}> {Nbrfuterror!='vrai'?Nbrfuterror:''}</p>
      </div>
 
      <div class="input-group">
      <label for="position">Volume en Litre</label>
      <input onChange={(e)=>setVol(e.target.value)} value={Vol}></input>
+     <p style={{color:'red'}}>{Volerror!='vrai'?Volerror:''}</p>
      </div>
 
    <div class="input-group">
      <label for="position">Date commande</label>
     <DatePicker 
-    selected={Datecomm} 
+    selected={new Date()} 
     dateFormat='dd/MM/yyyy'
     minDate={new Date()}
     maxDate={new Date()}
-    isClearable
+  
     onChange={(e)=>setDatecomm(e)} 
-    value={Datecomm} 
+    value={new Date()} 
     />   
     </div>
     </div>
@@ -298,6 +351,7 @@ const [affiche3,setAffiche3]=useState([])
  </div>
  
  <div class="form-step">
+ <p style={{color:'red'}}>{check!='vrai'?check:''} </p>
  <form action="/" method="POST">
         <table class="table table-commander">
         <thead className="text-primary">
@@ -336,7 +390,7 @@ const [affiche3,setAffiche3]=useState([])
     </form>
    <div class="btns-group">
      <a href="#" class="btnn btn-prev">Précident</a>
-     <a href="#" class="btnn btn-next ml-auto"   onClick={montanttotale} >Suivant</a>
+     <a href="#" class="btnn btn-nextarticle ml-auto"   onClick={montanttotale} >Suivant</a>
    </div>
  </div>
 
@@ -411,8 +465,8 @@ const [affiche3,setAffiche3]=useState([])
    </div>
    <div class="btns-group">
      <a href="#" class="btnn btn-prev">Précident</a>
-     {/* <a href="#" class="btnn btn-submit" onClick={()=>submit()} >Envoyer</a> */}
-     <input value="Submit" class="btn ml-auto " onClick={()=>submit()} />
+   
+     <input value="Envoyer" class="btn ml-auto " onClick={()=>submit()}  style={{background:'rgb(11, 78, 179)',color:'white',width:'150px'}}/> 
 
 
    </div>

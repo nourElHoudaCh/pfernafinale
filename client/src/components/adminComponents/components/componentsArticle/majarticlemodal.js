@@ -157,7 +157,7 @@ var Description=(data.Description);
     />
   
 </div><Button type='submit'>Envoyer</Button>
-        <Button onClick={props.handleClose}>Fermer</Button></form>
+        <Button onClick={()=> window.location.reload()}>Fermer</Button></form>
         
         </Box>
       </Modal>

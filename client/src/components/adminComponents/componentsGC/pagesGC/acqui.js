@@ -83,11 +83,6 @@ export default function Acqui() {
       const newaffiche= affiche.filter(el=>el._id==id)
       setAffichenew(newaffiche)
   
-      
-
-
-
-     
     }
     
  
@@ -177,8 +172,15 @@ export default function Acqui() {
 
  
 </tr>
+{affichenew.map(el=>{  return ( <> 
+<td>   <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"
+  value={el.Infoarticlescommander.des}
+  fullWidth  disabled/> 
+ 
+    </td> </>)
+    })}
+     
 {affichenew.map(el=>{  return ( <>
-<td>    <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"  fullWidth  disabled/></td>
 <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper"
  onChange={(e)=>setNbrfut(e.target.value)}  value={el.Nbrfut} fullWidth disabled /></td>
   <td >  <TextField variant="standard" id="demo-helper-text-misaligned-no-helper"

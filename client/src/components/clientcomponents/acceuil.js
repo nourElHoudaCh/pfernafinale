@@ -77,7 +77,7 @@ export default function Acceuil() {
         {el.Designation}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        L'alcool Mauvait goût ou technique est un alcool éthylique à 90° de TAV ayant les caractéristiques techniques suivantes.
+        {el.Description}
         </Typography>
       </CardContent>
       <CardActions>
