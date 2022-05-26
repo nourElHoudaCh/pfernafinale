@@ -17,7 +17,7 @@ async function getusers(){
     { $group: { _id:'$bonsorite', myCount: { $sum: 1 } } },
 
 ])
-console.log("allarticle in2022 ",cmdencours)
+
     }
     getusers()
   

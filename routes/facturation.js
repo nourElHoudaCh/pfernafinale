@@ -128,20 +128,7 @@ cmdfacturer.findOne({_id:mongoid})
    
 })
 
-async function getusers(){
-    admine = await Accounts.aggregate([
-                  
-        {$group : {_id:"$date", count:{$sum:1}} },
-        {
-            $sort : { count: -1 }
-          },
-          
-]).limit(7)
- console.log('usersparjour',admine)
 
-  
-}
-getusers()
 /* vente*/
 /* nbr des commandes par moins */
 router.get(

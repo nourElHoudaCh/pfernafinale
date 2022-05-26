@@ -5,30 +5,7 @@ const Commande = require("../models/Commande")
 const nodemailer=require('nodemailer')
 const cmdfacturer= require("../models/cmdfacturer")
 const Accounts = require("../models/Accounts")
-        
-async function getusers(){
-  const date = new Date();
-  const yearnow= date.getFullYear()
-  const monthnow=   ("0" + (date.getMonth() + 1)).slice(-2).toString();
-  const yearsnow =yearnow.toString()
-  const monthmax= await cmdfacturer.aggregate
-  ([
-      
-     {
-         $match: {year:yearsnow }},
-   
-     {
-       $sortByCount: "$Codeclient"
-     },
-     {$limit : 5},
-        
-     
-  
-  ])
-   console.log(monthmax)
-  
-    }
-    getusers()
+
     /* vente*/
     /* nbr des commandes par moins */
     router.get(

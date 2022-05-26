@@ -41,7 +41,6 @@ function Majarticlemodal(props) {
 
   const onSubmit=(data)=>{
       var Prix=(data.prix);
-
 var  Designation=(data. Designation);
 var Description=(data.Description);
 

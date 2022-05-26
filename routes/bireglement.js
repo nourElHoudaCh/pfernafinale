@@ -5,12 +5,7 @@ const Commande = require("../models/Commande")
 const nodemailer=require('nodemailer')
 const cmdfacturer= require("../models/cmdfacturer")
 const Accounts = require("../models/Accounts")
-        
-async function getusers(){
- 
 
-    }
-    getusers()
     router.get(
       "/revenumois",  async (req, res) => {
         const date = new Date();
