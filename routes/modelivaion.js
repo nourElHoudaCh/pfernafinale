@@ -1,16 +1,16 @@
 const express = require("express") //setting up an express serveur 
 const router=express.Router()
-const Modepaiement = require("../models/Modepaiement")
+const Modelivraison = require("../models/Modelivraison")
 
-router.post("/ajoutermodepaiement",(req,res)=>{
+router.post("/ajoutermodelivraison",(req,res)=>{
 
-    const {Codemodedepaiement,Modedepaiement}=req.body;
-    Modepaiement.findOne({Codemodedepaiement})
+    const {Codemodedelivraison,Modedelivraison}=req.body;
+    Modelivraison.findOne({Codemodedelivraison})
     .then((modep)=>{
         if (modep) {return res.sendStatus(409)}
         else {
-            const mode = new Modepaiement({
-                Codemodedepaiement,Modedepaiement
+            const mode = new Modelivraison({
+                Codemodedelivraison,Modedelivraison
             })
         mode.save()
         .then ((data)=>{
@@ -22,30 +22,30 @@ router.post("/ajoutermodepaiement",(req,res)=>{
     })
 })
 
-router.get("/allmodepaiement",(req,res)=>{
-    Modepaiement.find()
+router.get("/all",(req,res)=>{
+    Modelivraison.find()
     .then(data=>res.send(data))
     .catch(err=>console.error(err))
 })
 
-router.delete("/deletemodedepaiement/:id",(req,res)=>{
+router.delete("/deleteModedelivraison/:id",(req,res)=>{
     const id=req.params.id;
-    Modepaiement.findByIdAndDelete({_id:id})
+    Modelivraison.findByIdAndDelete({_id:id})
     .then(()=>{res.sendStatus(200)})
     .catch(err=>console.error(err))
 
 })
 router.put("/updateall/:id",(req, res)=>{
-    const {Codemodedepaiement,Modedepaiement}=req.body;
+    const {Codemodedelivraison,Modedelivraison}=req.body;
 
     if(!req.body){
         return res.status(400)
     }
     const id = req.params.id;
-    Modepaiement.findOne({Codemodedepaiement,Modedepaiement})
+    Modelivraison.findOne({Codemodedelivraison,Modedelivraison})
     .then((mode)=>{
         if(mode) return(res.sendStatus(409)); 
-        else{Modepaiement.findByIdAndUpdate({_id:id}, req.body, { useFindAndModify: false})
+        else{Modelivraison.findByIdAndUpdate({_id:id}, req.body, { useFindAndModify: false})
         .then(data => {
             if(!data){
                 res.status(404).send({ message : `Cannot Update article with ${id}. Maybe article not found!`})
@@ -55,8 +55,8 @@ router.put("/updateall/:id",(req, res)=>{
         .catch(err =>{ res.status(500) })} })
 })
 
-router.put("/updatemodedepaiement/:id",(req, res)=>{
-    const {Modedepaiement}=req.body;
+router.put("/updateModedelivraison/:id",(req, res)=>{
+    const {Modedelivraison}=req.body;
     const id = req.params.id;
     if(!req.body){
         return res.status(400)

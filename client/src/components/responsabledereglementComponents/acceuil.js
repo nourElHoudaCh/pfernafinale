@@ -101,7 +101,7 @@ function Home() {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Revenue par mois en(Dinars):</Typography>
+                                            <Typography variant="subtitle2">Revenu par mois(En Dinars):</Typography>
                                         </Grid>
                                       
                                     </Grid>
@@ -132,7 +132,7 @@ function Home() {
           <Line
            
             dataKey="count"
-            name="revenue par mois"
+            name="Revenu par mois"
             stroke={theme.palette.primary.dark} 
             fill={theme.palette.primary.dark} 
             strokeWidth="5"
@@ -157,9 +157,9 @@ function Home() {
                   
               }]}
              
-              layout={{width: 340,height: 210,title: 'etat de factures ',
+              layout={{width: 400,height: 210,title: 'État des factures ',
               
-              paper_bgcolor:'rgba(255, 255, 255, .0)',  paper_bgcolor:'#ffffff',
+              paper_bgcolor:'rgba(255, 255, 255, .0)',
             
            
               margin:{
@@ -181,7 +181,7 @@ function Home() {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">revenue par année en(Dinars):</Typography>
+                                            <Typography variant="subtitle2">Revenu par année(En Dinars):</Typography>
                                         </Grid>
                                        
                                     </Grid>
@@ -197,7 +197,7 @@ function Home() {
   <Tooltip />
   <Legend />
 
-  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="revenue par année"/>
+  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="Revenu par année"/>
  
 
 </BarChart>
@@ -214,7 +214,7 @@ function Home() {
                   marker: { colors: [theme.palette.secondary.main, '#1565c0',theme.palette.secondary.light,theme.palette.primary.light] },
                   
               }]}
-              layout={{width: 360,height: 210,title: 'factures par mode de paiement cette année ',
+              layout={{width: 415,height: 210,title: "Factures par mode de paiement de l'année courante",
              
               paper_bgcolor:'rgba(255, 255, 255, .0)',
            

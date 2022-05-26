@@ -177,7 +177,7 @@ const Home = ({ isLoading }) => {
                                             sx={{ color: 'inherit' }}
                                             onClick={(e) => handleChangeTime(e, true)}
                                         >
-                                          dernier mois
+                                          Dernier mois
                                         </Button>
                                         <Button
                                             disableElevation
@@ -228,7 +228,7 @@ const Home = ({ isLoading }) => {
                                                         color: theme.palette.primary[200]
                                                     }}
                                                 >
-                                                   nombre totale des commandes
+                                                   Nombre total des commandes
                                                 </Typography>
                                             </Grid>
                                         </Grid>
@@ -254,7 +254,7 @@ const Home = ({ isLoading }) => {
             dataKey="count"
            
             stroke="#FFFFFF"strokeWidth="5" dot={{fill:"#FFFFFF",stroke:"#FFFFFF",strokeWidth: 1,r:1}} activeDot={{fill:'#1565c0',stroke:"#8884d8",strokeWidth: 5,r:7}}
-            name="vente"
+            name="Vente"
             fill="#FFFFFF"
           
            
@@ -341,7 +341,7 @@ const Home = ({ isLoading }) => {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Le mois avec le plus nombre de vente cette année :</Typography>
+                                            <Typography variant="subtitle2">Le record de cette année par mois:</Typography>
                                         </Grid>
                                         <Grid item>
                                             <Typography variant="h3">{maxm}</Typography>
@@ -356,7 +356,7 @@ const Home = ({ isLoading }) => {
                                             sx={{ color: 'inherit' }}
                                             onClick={(e) => handleChangeTimebar(e, true)}
                                         >
-                                          meuilleur mois
+                                          Meilleur mois
                                         </Button>
                                         <Button
                                             disableElevation
@@ -378,8 +378,8 @@ const Home = ({ isLoading }) => {
   <Tooltip />
   <Legend />
 
-  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="quantité commandée"/>
-  <Bar dataKey="counts" fill="#598bff"  name ="nbr de fois commandées"/>
+  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="Quantité commandée"/>
+  <Bar dataKey="counts" fill="#598bff"  name ="Nombre de fois commandées"/>
 
 </BarChart>
                         </Grid>:
@@ -391,8 +391,8 @@ const Home = ({ isLoading }) => {
   <Tooltip />
   <Legend />
 
-  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="quantité commandée"/>
-  <Bar dataKey="counts" fill="#598bff"  name ="nbr de fois commandées"/>
+  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="Quantité commandée"/>
+  <Bar dataKey="counts" fill="#598bff"  name ="Nombre de fois commandées"/>
 
 </BarChart>
                         </Grid>
@@ -538,7 +538,7 @@ const Home = ({ isLoading }) => {
                                                 
                                             }}
                                         >
-                                          Nombre des commandes validées avec acquit(non livré)
+                                          Nombre des commandes validées avec acquit
                                         </Typography>
                                     }
                                     secondary={ cmdvalideraveca.map(el=> <><Typography variant="h4" sx={{

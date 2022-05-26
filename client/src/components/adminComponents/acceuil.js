@@ -206,7 +206,7 @@ axios.get("http://localhost:5000/depot/livraison").then(function(response) {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="h5">Revenue:</Typography>
+                                            <Typography variant="h5">Revenu:</Typography>
                                         </Grid>
                                         
                                     </Grid>
@@ -259,7 +259,7 @@ axios.get("http://localhost:5000/depot/livraison").then(function(response) {
           <Line
            
             dataKey="count"
-            name="revenue par mois"
+            name="Revenu par mois"
             stroke={theme.palette.primary.dark} 
             fill={theme.palette.primary.dark} 
             strokeWidth="5"
@@ -295,7 +295,7 @@ axios.get("http://localhost:5000/depot/livraison").then(function(response) {
           <Line
            
             dataKey="count"
-            name="revenue par mois"
+            name="Revenu par année"
             stroke={theme.palette.primary.dark} 
             fill={theme.palette.primary.dark} 
             strokeWidth="5"

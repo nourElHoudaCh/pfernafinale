@@ -155,7 +155,12 @@ var Description=(data.Description);
     )}
    
     />
-  
+    <div> 
+  <label for="img">  <img src="https://img.icons8.com/office/80/000000/add-image.png"/></label>
+  <input type="file" id="img" name="img" accept="image/*"  style={{display:"none" }}/>
+
+
+            </div>
 </div><Button type='submit'>Envoyer</Button>
         <Button onClick={()=> window.location.reload()}>Fermer</Button></form>
         

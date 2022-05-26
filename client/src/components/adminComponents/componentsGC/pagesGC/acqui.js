@@ -172,13 +172,19 @@ export default function Acqui() {
 
  
 </tr>
-{affichenew.map(el=>{  return ( <> 
-<td>   <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"
-  value={el.Infoarticlescommander.des}
+
+{affichenew.map(el=>{  return ( <>
+ <td>{el.Infoarticlescommander.map(m=>{return(<>
+     <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"
+  value={m.des}
   fullWidth  disabled/> 
  
-    </td> </>)
+   
+ </>)})} </td> 
+
+ </>)
     })}
+    
      
 {affichenew.map(el=>{  return ( <>
 <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper"
@@ -253,7 +259,7 @@ export default function Acqui() {
         </div>
         <div className='clearfix'>
         {affichenew.map(el=>{  return ( <>
-        <Button  onMouseMove={()=>update(facture)} onClick={()=>submit(el. Infoarticlescommander,el.Codeclient,el.Lieulivraison,el.email,el.Nbrfut,el.Vol,el.Modepaiement
+        <Button  onMouseMove={()=>update(facture)} onClick={()=>submit(el.Infoarticlescommander,el.Codeclient,el.Lieulivraison,el.email,el.Nbrfut,el.Vol,el.Modepaiement
     
    )} variant="contained" endIcon={<SendIcon />}>
         enregistrer

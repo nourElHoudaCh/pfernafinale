@@ -36,7 +36,7 @@ router.put("/update/:id",(req, res)=>{
         return res.status(400)
     }
     const id = req.params.id;
-    Article.findOne({CodeArticle})
+    Article.findOne({ Designation,Prix,Description})
     .then((art)=>{
         if(art) return(res.sendStatus(409)); 
         else{Article.findByIdAndUpdate({_id:id}, req.body, { useFindAndModify: false})
@@ -63,7 +63,20 @@ router.put("/updatequantite/:id",(req, res)=>{
         .catch(err =>{ res.sendStatus(500) })} 
     
 })
-
+router.put("/updateechent/:id",(req, res)=>{
+    const {VC:vc,DegreEnfencement:deg,Temperature:temp,TAV:tav,Densite:dens,Coef:coef}=req.body;
+    const id = req.params.id;
+    if(!req.body){
+        return res.status(400)
+    }
+    else{
+        Article.findByIdAndUpdate({_id:id}, req.body)
+        .then(data => {
+             res.send(data)
+        })
+        .catch(err =>{ res.sendStatus(500) })} 
+    
+})
 
 
 module.exports=router;

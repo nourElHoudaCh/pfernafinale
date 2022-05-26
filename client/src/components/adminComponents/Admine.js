@@ -10,6 +10,7 @@ import Home from './acceuil';
 import Stock from'./components/appstocks';
 import Appgf from './components/appnavgf';
 import Appmodepaiement from "./components/appmodepaiement";
+import Appmodelivraison from "./components/appmodelivraison";
 
 function Admine() {
   const [inactive, setInactive] = useState(false);
@@ -33,6 +34,7 @@ function Admine() {
         {active==="Échantillonnage"?<Apploc/>:
         active==="Articles"?<Apparticle/>:
         active==="Modes de paiement"?<Appmodepaiement/>:
+        active==="Modes de livraison"?<Appmodelivraison/>:
         active==="Gestion des commandes"?<GC/>:
         active==="Gestion des factures"?< Appgf/>:
         active==="Ajouter un compte utilisateurs"?<Ajtclient/>:

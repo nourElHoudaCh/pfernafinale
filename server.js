@@ -23,6 +23,7 @@ app.use("/article",require("./routes/article"));
 app.use("/user",require("./routes/accounts.js"));
 app.use("/commande",require("./routes/commande.js"));
 app.use("/modedepaiement",require("./routes/modepaiement.js"));
+app.use("/modedelivraison",require("./routes/modelivaion.js"));
 app.use("/facturation",require("./routes/facturation.js"));
 app.use("/cmdpayer",require("./routes/cmdfacturer.js"));
 app.use("/acquit",require("./routes/acquits.js"));

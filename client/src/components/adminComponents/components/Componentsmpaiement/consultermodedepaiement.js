@@ -1,27 +1,63 @@
 import axios from 'axios'
-import React,{useEffect,useState} from 'react';
-import './loc.css'
-import Majarticlemodal from './majarticlemodal';
+import React,{useEffect,useState,useRef} from 'react';
+import './ech.css'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Table,
+  Row,
+  Col,
+} from "reactstrap";
+import Majmodedepaiementmodal from './majmodedepaiementmodal'
+import Dialog from "./dialog";
 
+const MAJModedepaiement=()=> { 
+  const idProductRef = useRef();
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+    //Update
+    nameProduct: ""
+  });
+  const handleDialog = (message, isLoading, nameProduct) => {
+    setDialog({
+      message,
+      isLoading,
+      //Update
+      nameProduct
+    });
+  };
+  const handleDelete=(id)=>{
+    handleDialog("voulez-vous vraiment supprimer ce mode de paiemnt?", true, );
+    idProductRef.current = id;
+ 
+  }
 
-  const Article=()=> { 
+;
+  const areUSureDelete = (choose) => {
+    if (choose) {
+      axios.delete(`http://localhost:5000/modedepaiement/deletemodedepaiement/${idProductRef.current}`)
+      .then(res=>{if(res.status===200){
+      const newaffiche= affiche.filter(el=>el._id!==idProductRef.current)
+      setAffiche(newaffiche)
+      }})
+       .catch(err=>{console.log("not great")
+     })
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
+  };
+
+const [id,setId]=useState('')
     
 
-    const [id,setId]=useState('')
-    
-   const handleDelete=(id)=>{
-     axios.delete(`http://localhost:5000/article/delete/${id}`)
-     .then(res=>{if(res.status===200){
-     const newaffiche= affiche.filter(el=>el._id!==id)
-     setAffiche(newaffiche)
-     }})
-      .catch(err=>{console.log("not great")
-    })
-   }
 
    const [affiche,setAffiche]=useState([]) 
-const loadarticles=()=>{
-  axios.get("http://localhost:5000/article/all")
+const loadmodedepaiement=()=>{
+  axios.get("http://localhost:5000/modedepaiement/allmodepaiement")
   .then(res=>{ setAffiche(res.data)
   })
   .catch(err=>{
@@ -29,7 +65,7 @@ const loadarticles=()=>{
   })
 }
   useEffect(()=>{
-   loadarticles()
+   loadmodedepaiement()
   },[])
 
   const [open, setOpen] = React.useState(false);
@@ -44,16 +80,21 @@ const loadarticles=()=>{
   
   
     return (
-<main id="site-main">
-<div class="container">
+      <main id="site-main">
+<div class="containerarticle">
     
     <form action="/" method="POST">
-        <table class="table">
-            <thead class="thead-dark">
+    <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Modes de paiement</CardTitle>
+              </CardHeader>
+            
+    <CardBody>
+                <Table responsive>
+                <thead className="text-primary">
                 <tr>
-                    <th>Code Article</th>
-                    <th>Désignation</th>
-                    <th>Prix</th>
+                    <th>Code mode de paiement</th>
+                    <th>Mode de paiement</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -61,24 +102,36 @@ const loadarticles=()=>{
             <tbody>
             {affiche.map(el=>{
       return ( <><tr>
-        <td>{el.Designation}</td>
-        <td>{el.CodeArticle}</td>
-        <td>{el.Prix}</td>
+       
+       <td>{el.Codemodedepaiement}</td>
+        <td>{el.Modedepaiement}</td>
+
+
         <td> <a class="btn border-shadow update">
             <span  onClick={()=>handleOpen(el)} class="text-gradient"><i class="fas fa-pencil-alt"></i></span> </a></td>
         <td> <a class="btn border-shadow delete" >
             <span class="text-gradient"><i class="fas fa-times"  onClick={()=>handleDelete(el._id)}></i></span> </a></td>
-      </tr>
-      <Majarticlemodal loadarticles={loadarticles} open={open} data={id} handleClose={handleClose}/>
       
+      </tr>
+      <Majmodedepaiementmodal loadmodedepaiement={loadmodedepaiement} open={open} data={id} handleClose={handleClose}/>
+
       </>
       )
     })}
-           
+                  {dialog.isLoading && (
+        <Dialog
+          //Update
+          nameProduct={dialog.nameProduct}
+          onDialog={areUSureDelete}
+          message={dialog.message}
+        />
+      )}
    </tbody>
    
-        </table>
+   </Table>
+              </CardBody>
+              </Card>
     </form>
 </div>
 </main>)}
- export default Article ;
+ export default MAJModedepaiement;

@@ -159,7 +159,7 @@ function Home() {
                   
               }]}
              
-              layout={{width: 550,height: 210,title: 'factures sans bon sortie(NON) / avec bonsortie et non livrer(OUI) ',
+              layout={{width: 550,height: 210,title: 'Factures sans bon sortie (NON) / avec bon sortie et non livrées (OUI) ',
               
               paper_bgcolor:'rgba(255, 255, 255, .0)',  
             
@@ -183,7 +183,7 @@ function Home() {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Quantité et nbr de fois commandé de chaque article durant cette année:</Typography>
+                                            <Typography variant="subtitle2">Quantité commandée de chaque article durant cette année:</Typography>
                                         </Grid>
                                        
                                     </Grid>
@@ -199,9 +199,9 @@ function Home() {
   <Tooltip />
   <Legend />
 
-  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="quantité article"/>
+  <Bar dataKey="count" fill={theme.palette.secondary.main}  name ="Quantité commandée d'article"/>
   
-  <Bar dataKey="counts" fill={theme.palette.primary.main}  name ="nombre de fois commandé"/>
+  <Bar dataKey="counts" fill={theme.palette.primary.main}  name ="Nombre de fois commandé"/>
  
 
 </BarChart>
@@ -217,7 +217,7 @@ function Home() {
                                 <Grid item>
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">Entré totale du stock par année (En Litre)</Typography>
+                                            <Typography variant="subtitle2">Entrée totale du stock par année (En Litre):</Typography>
                                         </Grid>
                                       
                                     </Grid>
@@ -248,7 +248,7 @@ function Home() {
           <Line
            
             dataKey="count"
-            name="revenue par mois"
+            name="Revenu par mois"
             stroke={theme.palette.secondary.main} 
             fill={theme.palette.secondary.main} 
             strokeWidth="5"
