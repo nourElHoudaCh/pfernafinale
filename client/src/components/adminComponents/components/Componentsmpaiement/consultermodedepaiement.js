@@ -10,6 +10,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import './article.css'
 import Majmodedepaiementmodal from './majmodedepaiementmodal'
 import Dialog from "./dialog";
 
@@ -107,9 +108,9 @@ const loadmodedepaiement=()=>{
         <td>{el.Modedepaiement}</td>
 
 
-        <td> <a class="btn border-shadow update">
+        <td><a class="btn border-shadowmodif update">
             <span  onClick={()=>handleOpen(el)} class="text-gradient"><i class="fas fa-pencil-alt"></i></span> </a></td>
-        <td> <a class="btn border-shadow delete" >
+        <td> <a class="btn border-shadowdelete delete" >
             <span class="text-gradient"><i class="fas fa-times"  onClick={()=>handleDelete(el._id)}></i></span> </a></td>
       
       </tr>

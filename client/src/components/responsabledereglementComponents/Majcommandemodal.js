@@ -36,6 +36,7 @@ const maDate= new Date();
 const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
     const [numfacture, setnumfacture]=useState("");
     const [codeclient,setcodeclient]=useState('')
+    const [nomprenom,setnomprenom]=useState('')
     const [Prixtot,setPrixtot]=useState('')
     const [modeliv,setmodeliv]=useState('')
     const [lieuliv,setlieuliv]=useState('')
@@ -50,6 +51,7 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
       setmodeliv('')
       setlieuliv('')
       setmodepai('')
+      setnomprenom('')
   }
 
   useEffect(()=>{
@@ -61,6 +63,7 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
     setmodeliv(props.data.Modelivraison)
     setlieuliv(props.data.Lieulivraison)
     setmodepai(props.data.Modepaiement)
+    setnomprenom(props.data.nomprenom)
   },[props])
 
  
@@ -91,7 +94,7 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 1000, height:400 }}>
+        <Box sx={{ ...style, width: 800, height:450 }}>
           <h2 id="child-modal-title">Régler facture</h2>
          
           <div className='gridreglement'>
@@ -99,8 +102,11 @@ const [datpay, setdatpay]=useState(maDate.toLocaleDateString("fr"));
           <label for="position">Numéro de factue</label>
      <input  value= {numfacture} disabled></input>
 
-     <label for="position">codeclient-nom et prénom</label>
+     <label for="position">codeclient</label>
      <input  value= {codeclient} disabled ></input>
+     
+     <label for="position">nom et prénom</label>
+     <input  value= {nomprenom} disabled ></input>
      <label for="position">Prix totale</label>
      <input  value= {Prixtot} disabled></input>
      <label for="position">lieu de livraison</label>

@@ -6,41 +6,26 @@ import { TextField,} from "@material-ui/core";
 import axios from 'axios'
 import { MenuItem,FormControl,InputLabel,Select } from '@mui/material';
 import "./Ajoutclient.css"
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-
-const schema = yup.object().shape({
-
- email: yup.string().email(),
- password: yup.string().min(8).max(12).required('Veuillez entrer le mot de passe '),
- nom: yup.string().min(4).max(15).required('Veuillez entrer le nom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un nom valide'),
- prenom: yup.string().min(4).max(15).required('Veuillez entrer le prénom ').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un prénom valide'),
- societe:yup.string().min(4).max(15).required('Veuillez entrer la société').matches(/^[A-Za-z ]*$/, 'Veuillez entrer une société valide'),
-});
-
-
 function Majcomptesmodal(props) {
-  const {
-    handleSubmit,
-    formState: {errors},
-    control,reset
-  } = useForm({
-    resolver: yupResolver(schema)
-  });
-
-    const [societe, setsociete]=useState('');
+   const [societe, setsociete]=useState('');
     const [nom,setnom]=useState('')
     const [Prenom,setPrenom]=useState('')
     const [mail,setmail]=useState('')
     const [Identifiant,setIdentifiant]=useState('')
     const [password,setpassword]=useState('')
- 
     const [acctype,setacctype]=useState('')
     const [Submitted,setSubmitted]=useState(false);
     const [error,setError]=useState(false);
 
+    const reset=()=>{
+      setsociete("");
+      setnom("");
+      setPrenom("");
+      setmail("");
+      setIdentifiant("");
+      setpassword("");
+      setacctype("");
+}
 
   useEffect(()=>{
       setsociete(props.data.societe)
@@ -52,22 +37,11 @@ function Majcomptesmodal(props) {
     
       setacctype(props.data.acctype)
   },[props])
-
-  var test=true
-
-
     const onSubmit=(data)=>{
-      var prenom=(data.prenom);
-      var email=(data.email);
-      var nom=(data.nom);
-      var password=(data.password);
-      var societe=(data.societe);
-    
-
-        axios.put(`http://localhost:5000/user/update/${props.data._id}`,{nom,prenom,email,acctype,societe, password})
+        axios.put(`http://localhost:5000/user/update/${props.data._id}`,{societe:societe,nom,prenom:Prenom,mail:mail,identifiant:Identifiant,acctype:acctype,password})
         .then(res => {
           if(res.status===200){
-            reset({prenom:'',nom:'', email: '',password: '',societe:''}) ;
+            reset();
             setSubmitted(true)
             props.loadarticles()
             props.handleClose()
@@ -109,107 +83,26 @@ aria-describedby="child-modal-description"
 <Box sx={{ ...style, width: 800, height:550 }}>
   <h2 id="child-modal-title">Mise à jour compte utilisateur</h2>
   <p id="child-modal-description">
-    Vous pouvez mettre ce compte utilsateur à jour(Rentrer les données pour la confirmation)
-  </p><form onSubmit={handleSubmit(onSubmit)}>
+    Vous pouvez mettre ce compte utilsateur à jour
+  </p><form >
 
 <div  className='accmodalcss'>
 <div>
         <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
         label="Identifiant"   value={Identifiant} onChange={(e)=>setIdentifiant(e.target.value)}  fullWidth   disabled/></div>
-  <div>
-       
-           <Controller
-          name="societe"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={societe}
-        label="Société"
-        error={!!formState.errors?.societe}
-        helperText={errors.societe? errors.societe?.message : ''} fullWidth
-        />
-    )}
-   
-    />
+ 
+  <div> <TextField variant="standard"id="demo-helper-text-misaligned-no-helper" 
+        label="Société"   value={societe} onChange={(e)=>setsociete(e.target.value)}  fullWidth/>
         </div>
-       
- <div>
-      
-         <Controller
-          name="nom"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={nom}
-        label="Nom"
-        error={!!formState.errors?.nom}
-        helperText={errors.nom? errors.nom?.message : ''} fullWidth
-        />
-    )}
-   
-    />
-         
-      </div>
-      <div>
-      
-   <Controller
-          name="prenom"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={Prenom}
-        label="Prénom"
-        error={!!formState.errors?.prenom}
-        helperText={errors.prenom? errors.prenom?.message : ''} fullWidth
-        />
-    )}
-   
-    />
-        </div>
-         <div>
-      <Controller
-          name="email"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={mail} 
-        label="Email"
-        error={!!formState.errors?.email}
-        helperText={errors.email? errors.email.message : ''} fullWidth
-        />
-    )}
-   
-    />
-         </div>
-        <div>
-       
-
-<Controller
-          name="password"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={password} 
-        type="password"
-        label="Mot de passe"
-        error={!!formState.errors?.password}
-        helperText={errors.password? errors.password.message : ''} fullWidth
-        />
-    )}
-   
-    />
-        </div>
-      
+         <div><TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
+        label="Nom"   value={nom} onChange={(e)=>setnom(e.target.value)}  fullWidth/> </div>
+      <div>  <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
+        label="Prenom"   value={Prenom} onChange={(e)=>setPrenom(e.target.value)}  fullWidth/> </div>
+       <div> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
+        label="E-mail"    value={mail} onChange={(e)=>setmail(e.target.value)}  fullWidth/> </div>
+       <div> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" 
+        label="Mot de passe"  onChange={(e)=>setpassword(e.target.value)}  value={password}  type="password" fullWidth/> </div>
+     
 
    <div>
         <FormControl   fullWidth>
@@ -233,8 +126,8 @@ aria-describedby="child-modal-description"
         <br></br>
     
      <div>
-        <Button type='submit'>Envoyé</Button>
-        <Button onClick={()=> window.location.reload()}>Fermer</Button> </div></div></form>
+     <Button onClick={onSubmit}>Envoyer</Button>
+        <Button onClick={props.handleClose}>Fermer</Button></div></div></form>
 </Box>
 </Modal>
     </React.Fragment>

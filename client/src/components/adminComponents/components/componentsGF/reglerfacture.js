@@ -89,7 +89,7 @@ export default function Reglfcture() {
    
       
       <form action="/" method="POST"  >
-      <div className="tbaleregler">
+      
         <br></br> <br></br> <br></br> <br></br>
         <div class="cadre-table-scrollregler">
         <Card>
@@ -159,7 +159,7 @@ export default function Reglfcture() {
    </Table>
               </CardBody>
               </Card>
-        </div></div>
+        </div>
     </form>
 
       </>

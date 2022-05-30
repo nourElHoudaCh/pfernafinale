@@ -78,16 +78,13 @@ export default function Acqui() {
     })
   }
     ;
+    const quan=0;
     const afficheracquis=(id)=>{
      
       const newaffiche= affiche.filter(el=>el._id==id)
       setAffichenew(newaffiche)
-  
-      
-
-
-
      
+  
     }
     
  
@@ -107,10 +104,8 @@ export default function Acqui() {
         <AlertTitle>Alerte</AlertTitle>
         Un acquit existe déja 
       </Alert>:null}
-      <br></br>
-      <br></br>
-      <br></br>
-     <div className ="marignaqcuisformvente" >
+      <br></br>  <br></br>
+      <div className ="marignaqcuisformvente" >
        <h1 className='acquistitle'>Acquit à caution</h1>
       <div className='containermajacquis' >
         <div  className="grid_majacquis">
@@ -141,7 +136,7 @@ export default function Acqui() {
       
        <div  className="grid_majacquis">
        {affichenew.map(el=>{  return ( <>
-        <label for="position"> Codeclient/ Nom et Prénom</label>
+        <label for="position"> Code client</label>
      <input  value={el. Codeclient}disabled ></input>
      
       
@@ -177,11 +172,24 @@ export default function Acqui() {
   <th  > الحجم باللتر
   </th>
   <th >درجة الكحول</th>
-  <th> الكحول الخالصة</th>
-  <th>الكمية و الوزن الجملي للبضاعة</th>
+
+ 
 </tr>
+
 {affichenew.map(el=>{  return ( <>
-<td>    <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"  fullWidth  disabled/></td>
+ <td>{el.Infoarticlescommander.map(m=>{return(<>
+     <TextField variant="standard"  id="demo-helper-text-misaligned-no-helper"
+  value={m.des}
+  fullWidth  disabled/> 
+ 
+   
+ </>)})} </td> 
+
+ </>)
+    })}
+    
+     
+{affichenew.map(el=>{  return ( <>
 <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper"
  onChange={(e)=>setNbrfut(e.target.value)}  value={el.Nbrfut} fullWidth disabled /></td>
   <td >  <TextField variant="standard" id="demo-helper-text-misaligned-no-helper"
@@ -189,8 +197,7 @@ export default function Acqui() {
    value={el.Vol} fullWidth  disabled/></td>
  
   <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" label="" fullWidth disabled /></td>
-  <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" value={el.Nbrfut}  fullWidth  disabled/></td>
-  <td> <TextField variant="standard" id="demo-helper-text-misaligned-no-helper" label="" fullWidth  disabled/></td> </>
+  </>
       )
     })}
          </table>
@@ -210,10 +217,10 @@ export default function Acqui() {
     onChange={(e)=>{setdatesortie(e); setdatefin(e)}} value={datesortie}
     />   
       
-      <label for="position"> تاريخ و ساعة وصول البضاعة </label>
+      <label for="position"> تاريخ وصول البضاعة </label>
     <DatePicker 
     selected={datefin} 
-    dateFormat='yyyy/MM/dd kk:mm:ss'
+    dateFormat='yyyy/MM/dd '
     minDate={datesortie}
     
     
@@ -235,7 +242,7 @@ export default function Acqui() {
           <label for="position">الكمية</label>
      <input   type="text" disabled></input>
      <label for="position">الاسم و اللقب</label>
-     <input       onChange={(e)=>setnomprenom(e.target.value)} value= {el.Codeclient} disabled></input>
+     <input       onChange={(e)=>setnomprenom(e.target.value)} value= {el.nomprenom} disabled></input>
      
       
      <label for="position">العنوان</label>
@@ -255,7 +262,7 @@ export default function Acqui() {
         </div>
         <div className='clearfix'>
         {affichenew.map(el=>{  return ( <>
-        <Button  onMouseMove={()=>update(facture)} onClick={()=>submit(el. Infoarticlescommander,el.Codeclient,el.Lieulivraison,el.email,el.Nbrfut,el.Vol,el.Modepaiement
+        <Button  onMouseMove={()=>update(facture)} onClick={()=>submit(el.Infoarticlescommander,el.Codeclient,el.Lieulivraison,el.email,el.Nbrfut,el.Vol,el.Modepaiement
     
    )} variant="contained" endIcon={<SendIcon />}>
         enregistrer

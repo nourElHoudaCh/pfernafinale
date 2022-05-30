@@ -62,7 +62,7 @@ function Majmodedepaiementmodal(props) {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 1000, height:400 }}>
+        <Box sx={{ ...style, width: 550, height:350 }}>
           <h2 id="child-modal-title">Mise à jour mode de paiement</h2>
           <p id="child-modal-description">
             Vous pouvez mettre ce mode de paiement à jour
@@ -71,7 +71,7 @@ function Majmodedepaiementmodal(props) {
           <TextField
             id="nomarticle"
             label="Code mode de paiement"
-            variant="filled"
+            variant="standard"
             placeholder="entrer le nom du mode de paiement"
             fullWidth
             margin="normal"
@@ -82,7 +82,7 @@ function Majmodedepaiementmodal(props) {
            <TextField
             id="Modedepaiement"
             label="Mode de paiement"
-            variant="filled"
+            variant="standard"
             placeholder="entrer le mode de paiement"
             fullWidth
             margin="normal"

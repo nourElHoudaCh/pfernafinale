@@ -4,25 +4,10 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { TextField,} from "@material-ui/core";
 import axios from 'axios'
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-
-const schema = yup.object().shape({
-
-Modedelivraison:yup.string().min(4).max(15).required('Veuillez entrer le mode de livraison a mettre à jour').matches(/^[A-Za-z ]*$/, 'Veuillez entrer un mode de livraison valide'),
-});
 
 function MajModedelivraisonmodal(props) {
 
-  const {
-    handleSubmit,
-    formState: {errors},
-    control,reset
-  } = useForm({
-    resolver: yupResolver(schema)
-  });
 
     const [Modedelivraison, setModedelivraison]=useState('');
     const [Codemodedelivraison,setCodemodedelivraison]=useState('')
@@ -30,6 +15,10 @@ function MajModedelivraisonmodal(props) {
     const [error,setError]=useState(false);
 
 
+    const reset=()=>{
+      setModedelivraison("")
+      setCodemodedelivraison("")
+}
 
   useEffect(()=>{
       setModedelivraison(props.data.Modedelivraison)
@@ -37,14 +26,13 @@ function MajModedelivraisonmodal(props) {
   },[props])
 
 
-    const onSubmit=(data)=>{
+    const submit=(data)=>{
 
-      var Modedelivraison=(data.Modedelivraison);
 
         axios.put(`http://localhost:5000/modedelivraison/updateall/${props.data._id}`,{Codemodedelivraison,Modedelivraison})
         .then(res => {
             if(res.status===200){
-              reset({Modedelivraison:''});
+              reset();
               setSubmitted(true)
               props.loadarticles()
               props.handleClose()
@@ -88,7 +76,7 @@ function MajModedelivraisonmodal(props) {
           <p id="child-modal-description">
             Vous pouvez mettre ce mode de livraison à jour
           </p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form >
 
         <div>
         <TextField
@@ -103,27 +91,22 @@ function MajModedelivraisonmodal(props) {
             />
         </div>
  <div>
- <Controller
-          name="modelivraison"
-    control={control}
-   
-    render={({ field, formState }) => (
+ <TextField
+            id="modelivraison"
+            label="mode de livraison"
+            variant="standard"
+            placeholder="entrer le mode de livraison"
+            fullWidth
+            margin="normal"
+            onChange={(e)=>setModedelivraison(e.target.value)} 
+            value={Modedelivraison}
+            />
 
-           <TextField
-           {...field}
-           defaultValue={Modedelivraison}
-           label="Mode de livraison"
-           error={!!formState.errors?.Modedelivraison}
-           helperText={errors.Modedelivraison? errors.Modedelivraison?.message : ''} 
-           fullWidth
-            />
-            )}
-   
-            />
+ 
  </div>
 
    <div>
-        <Button type='submit'>Envoyer</Button>
+   <Button onClick={submit}>Envoyer</Button>
         <Button onClick={props.handleClose}>Fermer</Button>
    </div>
         </form>

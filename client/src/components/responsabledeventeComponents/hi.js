@@ -1,6 +1,6 @@
 import "./App.css";
-import SideMenu, { menuItems } from "./Menu/SideMenu";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SideMenu from "./Menu/SideMenu";
+
 import { useState,useEffect } from "react";
 import Commander from "./commander";
 import Home from "./dashboard/Default/acceuil";

@@ -13,9 +13,9 @@ import React,{useEffect,useState} from 'react';
 import Stack from '@mui/material/Stack';
 import { orange } from '@mui/material/colors';
 import jwt_decode from 'jwt-decode'
-import rna from './logo rna.png'
+
 export default function Acceuil() {
- 
+  
   const [affiche,setAffiche]=useState([]) 
   const loadarticles=()=>{
     axios.get("http://localhost:5000/article/all")
@@ -46,8 +46,7 @@ export default function Acceuil() {
   <div  className='topacceuil' >
     <div className='alertwidth'>
 
-
-
+ 
   {verif=='false'?
    <Alert severity="warning">
    <AlertTitle>Warning</AlertTitle>
@@ -70,7 +69,8 @@ export default function Acceuil() {
         component="img"
         alt="green iguana"
         height="140"
-        image="https://www.pyrenees.ad/alimentacio/image/cache/wp/cj/data/1016256696-578x578.webp"
+        
+        image={el.image}
       />
       <CardContent bgcolor="primary.main">
         <Typography gutterBottom variant="h5" component="div">

@@ -372,10 +372,10 @@ const [affiche3,setAffiche3]=useState([])
                   <td className="first-td-checkbox-commander">
                   <Checkbox
                   onClick={handleToggle({id:el._id,des:el.Designation,cd:el.CodeArticle,quan:el.quantite,pr:el.Prix})}
-                  id="vehicle1"
+                  id="article"
                     edge="end"
                   />
-                  <label for="vehicle1">{el.Designation}</label>
+                  <label for="article">{el.Designation}</label>
                   </td>
                   <td>{el.CodeArticle}</td>
                   <td>{el.Prix}</td>

@@ -267,7 +267,7 @@ const [affiche3,setAffiche3]=useState([])
     </Alert>:null}
   <br></br>
   <br></br> <br></br>
- <form action="#" class="formadmin">
+ <form action="#" class="formadminvente">
  <h1 class="text-center">Commander</h1>
  
  <div class="progressbar">
@@ -522,8 +522,8 @@ const [affiche3,setAffiche3]=useState([])
                     )
                   })}
 
-
-   </div>
+</div>
+  
  </div>
 </form>
       <p>{error}</p>

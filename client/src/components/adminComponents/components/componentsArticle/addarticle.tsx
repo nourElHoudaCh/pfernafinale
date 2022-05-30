@@ -41,7 +41,7 @@ const schema = yup.object().shape({
    
   const classes = useStyles();
   const [CodeArticle, setCodeArticle]=useState('');
- 
+  const [image, setImage]=useState('');
   const [Submitted,setSubmitted]=useState(false);
   const [error,setError]=useState(false);
 
@@ -56,7 +56,7 @@ var codearticle=(data.code);
 var nomarticle=(data.nom);
 var Description=(data.Description);
 
-    axios.post("http://localhost:5000/article/ajouter",{codearticle,nomarticle,prixarticle,Description})
+    axios.post("http://localhost:5000/article/ajouter",{codearticle,nomarticle,prixarticle,Description,image})
     .then(res => {
         if(res.status===200){
           reset({ prix:'',nom:'',code:'',Description:''}) 
@@ -197,19 +197,20 @@ var Description=(data.Description);
             )}
           />
            
-            <Controller
-            name="photo"
-            control={control}
-            render={({ field }) => (
+            
               <div> 
-  <label for="img">  <img src="https://img.icons8.com/office/80/000000/add-image.png"/></label>
-  <input type="file" id="img" name="img" accept="image/*"  style={{display:"none" }}/>
+ 
 
-
+  {image ?  <label  htmlFor="file" style={{cursor: 'pointer'}} >
+      <img   style={{width:'50px',height:'50px'}} src={URL.createObjectURL(image)} alt=""/></label> 
+:
+       <label  htmlFor="file" style={{cursor: 'pointer'}} ><img src="https://img.icons8.com/office/80/000000/add-image.png"/></label> }           
+    
+     
+      
+      <input type="file" id="file"  name="image" accept="image/*" style={{ display: "none" }} onChange={(e)=>setImage(e.target.files[0])} />
             </div>
-       
- )}
-          /></div>
+  </div>
           </div>
           <div className='butart'>
             <div className='bt'>

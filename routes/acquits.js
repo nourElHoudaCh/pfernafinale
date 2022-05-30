@@ -51,7 +51,7 @@ router.put("/updateacquit/:id",(req, res)=>{
              res.send(data) })
         .catch(err =>{ res.sendStatus(500) })} })
 router.post("/ajouterbonsortie",(req,res)=>{
-    const {facture,datebonsortie}=req.body;
+    const {Infoarticlescommander,Codeclient, Nbrfut,Vol, Datecomm, Datefac,Numcomm,facture,datebonsortie}=req.body;
  
 
     bonsortie.findOne({Numfac:facture})
@@ -60,7 +60,7 @@ router.post("/ajouterbonsortie",(req,res)=>{
             return res.sendStatus(409)}
         else  {
             const art = new bonsortie({
-               Numfac:facture, datebonsortie:datebonsortie
+               Numfac:facture, datebonsortie:datebonsortie,Infoarticlescommander,Codeclient, Nbrfut,Vol, Datecomm, Datefac,Numcomm
             })
           
         art.save()

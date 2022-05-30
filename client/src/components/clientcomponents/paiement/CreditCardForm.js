@@ -8,15 +8,18 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-
+import DatePicker from 'react-datepicker';
 
 function CreditCardForm(props) {
 
   const [number, setnumber]=useState('');
+  const [numbererror, setnumbererror]=useState('');
+  const [dateerror, setdateerror]=useState('');
   const [name, setname]=useState('');
   const[lastname,setlastname]=useState('');
   const [expiry, setexpiry]=useState('');
   const [cvc, setcvc]=useState('');
+  const [cvcerror, setcvcerror]=useState('');
   const [focus, setfocus]=useState('');
   const [email,setemail]=useState('');
   const [Submitted,setSubmitted]=useState(false);
@@ -87,6 +90,17 @@ function CreditCardForm(props) {
   };
 
   const submit=(id)=>{
+    if (number[0]!=4  && number[0]!=5 ||number.length!=16)
+    {setnumbererror("verifier votre carte")}
+    else{setnumbererror("vrai")}
+    if (cvc.length!=3 ||isNaN(cvc))
+    {setcvcerror("verifier le code cvc")}
+    else{setcvcerror("vrai")}
+    if(expiry==='')
+    {setdateerror("veuillez entrer la date d'expiration")}
+    else{setdateerror("vrai")}
+    if(numbererror=="vrai" && dateerror=='vrai'&& cvcerror=='vrai')
+    {
     axios.put(`http://localhost:5000/facturation/updateetat/${id}`,{etat:"payee",Datepaiement:datpay,email})
     .then(res => {
         if(res.status===200){
@@ -103,7 +117,7 @@ function CreditCardForm(props) {
     .catch(err =>  {setError(true)
      
       setSubmitted("")
- })
+ })}
 }
   
   return (
@@ -124,7 +138,7 @@ function CreditCardForm(props) {
       <Cards
       number={number}
       name={name}
-      expiry={expiry}
+      expiry={expiry.toString()}
       cvc={cvc}
       focused={focus}
       />
@@ -140,6 +154,7 @@ function CreditCardForm(props) {
         
         minLength={16}
         maxLength={16} />
+          <p style={{color:'red'}}>{numbererror!='vrai'?numbererror:''}</p>
 
           <input
         type="text"
@@ -155,18 +170,17 @@ function CreditCardForm(props) {
         placeholder="Email"
         value={email}
         onChange={(e)=>{setemail(e.target.value)}} />
-
-        <input
-        type="tel"
-        name="expiry"
-        placeholder="MM/AA expiration"
-        value={expiry}
-        pattern="\d\d/\d\d"
-        required
-        minLength={4}
-        maxLength={4}
-        onChange={(e)=>{setexpiry(e.target.value)}}
-        onFocus={(e)=>{setfocus(e.target.name)}} /> 
+  
+ <DatePicker 
+    selected={expiry} 
+    dateFormat='MM/dd '
+    name="expiry"
+    minDate={new Date()}
+    onChange={(e)=>setexpiry(e)}  value={expiry} 
+    onFocus={(e)=>{setfocus(e.target.name)}} 
+    />   
+       <p style={{color:'red'}}>{dateerror!='vrai'?dateerror:''}</p>
+       
 
            <input
         type="tel"
@@ -179,6 +193,8 @@ function CreditCardForm(props) {
         minLength={3}
         required
         />
+         <p style={{color:'red'}}>{cvcerror!='vrai'?cvcerror:''}</p>
+       
       </form>
     </div>
           <Button  onClick={()=>submit(props.data._id)} >Payer {""}{props.data.PrixTOT}{"DT"}</Button>

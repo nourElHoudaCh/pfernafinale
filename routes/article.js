@@ -2,14 +2,14 @@ const express = require("express") //setting up an express serveur
 const router=express.Router()
 const Article = require("../models/Article")
     router.post("/ajouter",(req,res)=>{
-    const {codearticle,nomarticle,prixarticle,Description }=req.body;
+    const {codearticle,nomarticle,prixarticle,Description,image }=req.body;
     Article.findOne({ CodeArticle:codearticle})
     .then((arti)=>{
         if (arti) {return res.sendStatus(409)}
         else {
             const art = new Article({
                 CodeArticle:codearticle,Designation:nomarticle,Prix:prixarticle,Description ,Date:new Date(),VC:0,DegreEnfencement:0,
-                Temperature:0,TAV:0 ,Densite:0,Coef:0,Quantite:0
+                Temperature:0,TAV:0 ,Densite:0,Coef:0,Quantite:0 ,image
             })
         art.save()
         .then ((data)=>{

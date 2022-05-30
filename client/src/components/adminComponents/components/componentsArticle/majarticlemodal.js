@@ -2,35 +2,23 @@ import React,{useState,useEffect} from 'react'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { TextField,} from "@material-ui/core";
-import { MenuItem,FormControl,InputLabel,Select } from '@mui/material';
-import axios from 'axios'
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { TextField,} from "@material-ui/core";import axios from 'axios'
 
-const schema = yup.object().shape({
 
-  Designation: yup.string().min(4).max(30).required("Veuillez entrer le nom  de l'eharticle").matches(/^[A-Za-z û é à ]*$/, 'Veuillez entrer un nom valide'),
-  Prix: yup.number().required('Veuillez entrer le prix'),
-  Description: yup.string().min(50).max(200).required('Veuillez entrer la description'),
-  
- });
 function Majarticlemodal(props) {
-  const {
-    handleSubmit,
-    formState: {errors},
-    control,reset
-  } = useForm({
-    resolver: yupResolver(schema)
-  });
+
     const [CodeArticle, setCodeArticle]=useState('');
     const [Designation,setDesignation]=useState('')
     const [Prix,setPrix]=useState('')
     const [Description,setDescription]=useState('')
     const [Submitted,setSubmitted]=useState(false);
     const [error,setError]=useState(false);
-  
+    const reset=()=>{
+      setCodeArticle("");
+      setDesignation("");
+      setDescription("");
+      setPrix("");
+}
 
   useEffect(()=>{
       setCodeArticle(props.data.CodeArticle)
@@ -40,14 +28,11 @@ function Majarticlemodal(props) {
   },[props])
 
   const onSubmit=(data)=>{
-      var Prix=(data.prix);
-var  Designation=(data. Designation);
-var Description=(data.Description);
-
+     
         axios.put(`http://localhost:5000/article/update/${props.data._id}`,{CodeArticle, Designation,Prix,Description})
         .then(res => {
             if(res.status===200){
-              reset({ Designation:'',Prix:'',Description: ''}) ;
+              reset();
               setSubmitted(true)
               props.loadarticles()
               props.handleClose()
@@ -91,10 +76,10 @@ var Description=(data.Description);
           <p id="child-modal-description">
             Vous pouvez mettre cette article à jour
           </p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form >
           <TextField
             id="codearticle"
-            label="nom de l'article"
+            label="code de l'article"
             variant="standard"
             placeholder="entrer le code de l'article"
             fullWidth
@@ -102,66 +87,49 @@ var Description=(data.Description);
             onChange={(e)=>setCodeArticle(e.target.value)} 
             value={CodeArticle} disabled
             />
-             <Controller
-         name="Designation"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={Designation}
-        label="Nom de l'article"
-        error={!!formState.errors?.Designation}
-        helperText={errors.Designation? errors.Designation?.message : ''} fullWidth
-        />
-    )}
-   
-    />
-         
-      <Controller
-          name="Prix"
-    control={control}
-   
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={Prix}
-        margin="normal"
-        label="Prix de l'article"
-        error={!!formState.errors?.Prix}
-        helperText={errors.Prix? errors.Prix?.message : ''}  fullWidth
-        />
-    )}
-   
-    />
-    
+             <TextField
+            id="nomarticle"
+            label="nom de l'article"
+            variant="standard"
+            placeholder="entrer le nom de l'article"
+            fullWidth
+            margin="normal"
+            onChange={(e)=>setDesignation(e.target.value)} 
+            value={Designation} 
+            />
+             <TextField
+            id="Prix"
+            label="Prix de l'article"
+            variant="standard"
+            placeholder="entrer le prix de l'article"
+            fullWidth
+            margin="normal"
+            onChange={(e)=>setPrix(e.target.value)} 
+            value={Prix} 
+            />
           <div style ={{display:'flex', justifyContent:'space-between'}}>
-          <Controller
-          name="Description"
-    control={control}
+          <TextField
+            id="Description"
+            label="Description de l'article"
+            variant="standard"
+            multiline
+            rows={3}
+            fullWidth
+            margin="normal"
+            onChange={(e)=>setDescription(e.target.value)} 
+            value={Description} 
+            />
+        
    
-    render={({ field, formState }) => (
-        <TextField
-        {...field}
-        defaultValue={Description}
-      
-        multiline
-        rows={3}
-        label=" Description de l'article"
-        error={!!formState.errors?.Description}
-        helperText={errors.Description? errors.Description?.message : ''}  fullWidth
-        />
-    )}
    
-    />
     <div> 
   <label for="img">  <img src="https://img.icons8.com/office/80/000000/add-image.png"/></label>
   <input type="file" id="img" name="img" accept="image/*"  style={{display:"none" }}/>
 
 
             </div>
-</div><Button type='submit'>Envoyer</Button>
-        <Button onClick={()=> window.location.reload()}>Fermer</Button></form>
+</div>  <Button onClick={onSubmit}>Envoyer</Button>
+        <Button onClick={props.handleClose}>Fermer</Button></form>
         
         </Box>
       </Modal>

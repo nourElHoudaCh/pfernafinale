@@ -78,10 +78,12 @@ export default function Acqui() {
     })
   }
     ;
+    const quan=0;
     const afficheracquis=(id)=>{
      
       const newaffiche= affiche.filter(el=>el._id==id)
       setAffichenew(newaffiche)
+     
   
     }
     

@@ -1,3 +1,4 @@
+const { binary } = require("joi");
 const mongoose = require("mongoose");
 const { required } = require("nodemon/lib/config");
 const Schema = mongoose.Schema
@@ -39,6 +40,11 @@ Quantite :{
 ,
 Description :{
     type : String
+}
+,
+image:{
+   data:Buffer,
+   ContentType:String
 }
 })
 
