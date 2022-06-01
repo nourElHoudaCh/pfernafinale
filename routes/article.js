@@ -1,22 +1,28 @@
 const express = require("express") //setting up an express serveur 
 const router=express.Router()
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination:(req,file,callback)=>{
+        callback(null,'./client/public/uploads/');
+    },
+    filename:(req,file,callback)=>{
+        callback(null,file.originalname);
+    },
+})
+const upload=multer({storage:storage})
 const Article = require("../models/Article")
-    router.post("/ajouter",(req,res)=>{
-    const {codearticle,nomarticle,prixarticle,Description,image }=req.body;
-    Article.findOne({ CodeArticle:codearticle})
-    .then((arti)=>{
-        if (arti) {return res.sendStatus(409)}
-        else {
+    router.post("/ajouter",upload.single("image"), (req,res)=>{
+
             const art = new Article({
-                CodeArticle:codearticle,Designation:nomarticle,Prix:prixarticle,Description ,Date:new Date(),VC:0,DegreEnfencement:0,
-                Temperature:0,TAV:0 ,Densite:0,Coef:0,Quantite:0 ,image
+                CodeArticle:req.body.CodeArticle,Designation:req.body.Designation,Prix:req.body.Prix,Description:req.body.Description
+                ,image:req.file.originalname
             })
         art.save()
         .then ((data)=>{
         res.sendStatus(200);
         })
         .catch(err=>res.sendStatus(404))
-    }  })
+   
 })
 router.get("/all",(req,res)=>{
     Article.find()
@@ -29,7 +35,7 @@ router.delete("/delete/:id",(req,res)=>{
     .then(()=>{res.sendStatus(200)})
     .catch(err=>console.error(err))
 })
-router.put("/update/:id",(req, res)=>{
+router.put("/update/:id",upload.single("image"), (req, res)=>{
     const {CodeArticle, Designation,Prix,Description}=req.body;
 
     if(!req.body){
@@ -39,7 +45,7 @@ router.put("/update/:id",(req, res)=>{
     Article.findOne({ Designation,Prix,Description})
     .then((art)=>{
         if(art) return(res.sendStatus(409)); 
-        else{Article.findByIdAndUpdate({_id:id}, req.body, { useFindAndModify: false})
+        else{Article.findByIdAndUpdate({_id:id}, req.body,{ useFindAndModify: false})
         .then(data => {
             if(!data){
                 res.status(404).send({ message : `Cannot Update article with ${id}. Maybe article not found!`})

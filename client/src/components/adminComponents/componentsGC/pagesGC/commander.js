@@ -60,15 +60,17 @@ else{
       updateProgressbar();}
     });}
   );
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
   nextBtnsarticle.forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (document.getElementById('article').checked ) 
-       {setcheck('vrai')}
-       else {setcheck('veuillez choisir au moins un article')}
-      if (check=='vrai' ){
+    
+      
+      if (document.querySelectorAll('input[type="checkbox"]:checked').length > 0 ){
       formStepsNum++;
       updateFormSteps();
-      updateProgressbar();}
+      setcheck('vrai')
+      updateProgressbar();} else {setcheck('veuillez choisir au moins un article')}
     });}
   );
   prevBtns.forEach((btn) => {
@@ -398,7 +400,7 @@ const [affiche3,setAffiche3]=useState([])
  
  <div class="form-step">
  <p style={{color:'red'}}>{check!='vrai'?check:''} </p>
- <form action="/" method="POST">
+ <form>
         <table class="table table-commander">
              <thead className="text-primary">
                 <tr>
@@ -416,17 +418,17 @@ const [affiche3,setAffiche3]=useState([])
                   return (
                     <tr key={i}>
                   <td className="first-td-checkbox-commander">
-                  <Checkbox
-                  onClick={handleToggle({id:el._id,des:el.Designation,cd:el.CodeArticle,quan:el.quantite,pr:el.Prix})}
+                  <input type = "checkbox"  style={{  zoom: 1.8}} onClick={handleToggle({id:el._id,des:el.Designation,cd:el.CodeArticle,quan:el.quantite,pr:el.Prix})}
                   id="article"
                     edge="end"
-                  />
+                    class="article"/> 
+                 
                   <label for="article">{el.Designation}</label>
                   </td>
                   <td>{el.CodeArticle}</td>
                   <td>{el.Prix}</td>
                   <td>{el.Quantite}</td>
-                  <td><input value={checked.quan} onChange={event=>handleChange(el._id,event)} name="quan" /></td>
+                  <td><input value={check.quan} onChange={event=>handleChange(el._id,event)} name="quan" id ="quan" /></td>
                   </tr>
                   )
                 })}

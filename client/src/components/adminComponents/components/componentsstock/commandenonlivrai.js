@@ -21,10 +21,9 @@ export default function Livraison() {
   const [month,setmonth]=useState((elem[1]));
   const [year,setyear]=useState(elem[2]);
   const [day,setday]=useState(elem[0]);
-  const [monthname,setmonthname]=useState(maDate.toLocaleString('en-us', { month: 'long' }));
+  const [monthname,setmonthname]=useState(maDate.toLocaleString('fr', { month: 'long' }));
  
-  
- 
+
 
   const [error,setError]=useState(false);
   const handlevalider=(Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixTOT,Remise,mongoid,Numcomm,etat,acquit,bonsorite,Datevalidationcomm,Datepaiement,email,nomprenom)=>{
@@ -139,7 +138,7 @@ erreur — <strong>erreur!</strong>
         <td  scope="row">{el. Modelivraison}</td>
         <td  scope="row">{el. PrixTOT}</td>
         <td   scope="row">{el.acquit}</td>
-        <td   scope="row">{el.  bonsorite}</td>
+        <td   scope="row">{el.bonsorite}</td>
         <td >  <a class="btndetails border-shadowdetails ">
             <span  ><i  onMouseMove={()=>handleDeletecommandevalider(el._id)} onClick={()=>handlevalider(el.Codeclient,el.Lieulivraison,el.Modelivraison,el.Modepaiement,el.Nbrfut,el.Vol,el.Datecomm,el.Infoarticlescommander,el.PrixTOT,el.Remise,el._id ,el.Numcomm,el.etat,el.acquit,el.bonsorite,el.Datevalidationcomm,el.Datepaiement,el.email,el.nomprenom) } >  <BsCheckLg/></i></span> </a></td>
            

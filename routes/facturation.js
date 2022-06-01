@@ -106,9 +106,7 @@ cmdfacturer.findOne({_id:mongoid})
         if (arti) {
             return res.sendStatus(409)}
         else  {
-            
-
-            const art = new cmdfacturer({
+     const art = new cmdfacturer({
                 Codeclient,Lieulivraison,Modelivraison,Modepaiement,Nbrfut,Vol,Datecomm,Infoarticlescommander,PrixTOT,Remise,Numcomm,etat,acquit,bonsorite,Datevalidationcomm,Datepaiement,email,nomprenom
               ,datefacturehistorise: date , NumFac:mongoid,month,year,day,monthname
             })

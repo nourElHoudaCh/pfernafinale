@@ -10,6 +10,7 @@ function Majarticlemodal(props) {
     const [CodeArticle, setCodeArticle]=useState('');
     const [Designation,setDesignation]=useState('')
     const [Prix,setPrix]=useState('')
+    const [image,setImage]=useState('')
     const [Description,setDescription]=useState('')
     const [Submitted,setSubmitted]=useState(false);
     const [error,setError]=useState(false);
@@ -25,11 +26,18 @@ function Majarticlemodal(props) {
       setDesignation(props.data.Designation)
       setDescription(props.data.Description)
       setPrix(props.data.Prix)
+      setImage(`/uploads/${props.data.image}`)
   },[props])
 
   const onSubmit=(data)=>{
-     
-        axios.put(`http://localhost:5000/article/update/${props.data._id}`,{CodeArticle, Designation,Prix,Description})
+    data.preventDefault();  const formData = new FormData();
+
+    formData.append('CodeArticle',CodeArticle);
+    formData.append('Designation',Designation);
+    formData.append('Prix',Prix);
+    formData.append('Description',Description);
+    
+        axios.put(`http://localhost:5000/article/update/${props.data._id}`,(formData))
         .then(res => {
             if(res.status===200){
               reset();
@@ -76,7 +84,7 @@ function Majarticlemodal(props) {
           <p id="child-modal-description">
             Vous pouvez mettre cette article à jour
           </p>
-          <form >
+          <form   onSubmit={onSubmit} encType='multipart/form-data'  >
           <TextField
             id="codearticle"
             label="code de l'article"
@@ -123,12 +131,12 @@ function Majarticlemodal(props) {
    
    
     <div> 
-  <label for="img">  <img src="https://img.icons8.com/office/80/000000/add-image.png"/></label>
-  <input type="file" id="img" name="img" accept="image/*"  style={{display:"none" }}/>
+  <label for="img">  <img    style={{width:'50px',height:'50px'}} src={image}/></label>
+  <input type="file" id="file" name="image" accept="image/*"  onChange={(e)=>setImage(e.target.files[0])}  style={{display:"none" }}/>
 
 
             </div>
-</div>  <Button onClick={onSubmit}>Envoyer</Button>
+</div>  <Button  type='submit'>Envoyer</Button>
         <Button onClick={props.handleClose}>Fermer</Button></form>
         
         </Box>

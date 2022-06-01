@@ -43,8 +43,7 @@ Description :{
 }
 ,
 image:{
-   data:Buffer,
-   ContentType:String
+    type: String,
 }
 })
 

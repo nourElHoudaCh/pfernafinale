@@ -67,10 +67,10 @@ export default function Acceuil() {
          <br></br>
       <CardMedia
         component="img"
-        alt="green iguana"
+       
         height="140"
         
-        image={el.image}
+       image={`/uploads/${el.image}`}
       />
       <CardContent bgcolor="primary.main">
         <Typography gutterBottom variant="h5" component="div">

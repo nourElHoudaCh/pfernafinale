@@ -1,7 +1,7 @@
 import  MenuArticle from './componentsArticle/menuarticle';
 import React, { useState } from 'react';
 import Article from './componentsArticle/consultmajarticle';
-import Addarticle from './componentsArticle/addarticle.tsx';
+import Addarticle from './componentsArticle/addarticle';
 
 function Apparticle() {
   const [commander, setCommander]=useState("");

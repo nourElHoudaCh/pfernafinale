@@ -61,7 +61,7 @@ const cmdfacturerSchema=new Schema({
         type:String,
     },
     datefacturehistorise:{
-        type:Date,
+        type:String,
     },
     nomprenom:{
         type:String
